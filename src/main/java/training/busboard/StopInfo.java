@@ -23,4 +23,10 @@ public class StopInfo {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
         expectedArrivalTime = LocalDateTime.parse(expectedArrival, formatter);
     }
+
+    public int isBefore(StopInfo stopInfo2){
+        if(this.expectedArrivalTime.isBefore(stopInfo2.expectedArrivalTime)) return -1;
+        else if (this.expectedArrivalTime.isAfter(stopInfo2.expectedArrivalTime)) return 1;
+        else return 0;
+    }
 }
