@@ -1,7 +1,16 @@
 package training.busboard;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class StopInfo {
-    String lineId;
-    String destinationName;
-    String expectedArrival;
+
+    StopInfo(){
+
+    }
+    public String $type;
+    public String lineId;
+    public String destinationName;
+    public String expectedArrival;
 }
