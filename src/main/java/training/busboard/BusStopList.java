@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class BusStopsInfo {
-    public ArrayList<BusStop> busStops;
+public class BusStopList {
+    public ArrayList<BusStop> stopPoints;
 }

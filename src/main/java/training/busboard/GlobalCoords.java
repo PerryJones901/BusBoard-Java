@@ -7,5 +7,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class GlobalCoords {
 
     public String longitude;
-    public String latitute;
+    public String latitude;
 }

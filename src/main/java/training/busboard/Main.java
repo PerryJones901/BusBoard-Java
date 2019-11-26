@@ -21,16 +21,17 @@ public class Main {
 
         //Get the lon and lat.
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        PostcodeInfo postcodeInfo = client.target("https://api.postcodes.io/postcodes/" + postcode)
+        PostcodeInfo postcodeInfo = client.target(String.format("https://api.postcodes.io/postcodes/%s", postcode))
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(PostcodeInfo.class);
 
         //Find the nearest two bus stops.
-        BusStopsInfo busStopsInfo = client.target("https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanPublicBusCoachTram&modes=bus&lat=51.4949&lon=-0.187331")
+        BusStopList busStopList = client.target(String.format("https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanPublicBusCoachTram&modes=bus&radius=1000&lat=%s&lon=%s",
+                postcodeInfo.result.latitude, postcodeInfo.result.longitude))
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .get(BusStopsInfo.class);
+                .get(BusStopList.class);
         //SORT ERROR HERE:
-        System.out.println(busStopsInfo.busStops.get(0).naptanId);
+        System.out.println(busStopList.stopPoints.get(0).naptanId);
 
         //Obtain data from TfL - Bus Stop with given ID:
         ArrayList<StopInfo> stopInfoList = client.target("https://api.tfl.gov.uk/StopPoint/490008660N/Arrivals")
