@@ -16,16 +16,23 @@ import java.util.stream.Collectors;
 
 public class BusInfo {
     private final String postcode;
+    private final ArrayList<String> output;
 
     public BusInfo(String postcode) {
         this.postcode = postcode;
+        this.output = textOfNextBuses();
     }
 
     public String getPostcode() {
         return postcode;
     }
 
-    public String textOfNextBuses(){
+    public ArrayList<String> getOutput() {
+        return this.output;
+    }
+
+    public ArrayList<String> textOfNextBuses(){
+        ArrayList<String> output = new ArrayList<String>();
         //Get the lon and lat.
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
         PostcodeInfo postcodeInfo = client.target(String.format("https://api.postcodes.io/postcodes/%s", this.postcode))
@@ -38,7 +45,6 @@ public class BusInfo {
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(BusStopList.class);
         busStopList.stopPoints = new ArrayList<BusStop>(busStopList.stopPoints.subList(0,2));
-        String output = "";
         for (BusStop busStop: busStopList.stopPoints) {
             System.out.println("We are now looking at busStop: " + busStop.naptanId);
 
@@ -55,7 +61,7 @@ public class BusInfo {
                     sorted((p1, p2)->p1.isBefore(p2)).limit(5).collect(Collectors.toList());
 
             for(StopInfo stop: sortedStopInfoList){
-                output = output.concat(String.format( "Bus %s towards %s is arriving at %s\n", stop.lineId, stop.destinationName, stop.expectedArrivalTime.toString()));
+                output.add(String.format( "Bus %s towards %s is arriving at %s\n", stop.lineId, stop.destinationName, stop.expectedArrivalTime.toString()));
             }
         }
         return output;

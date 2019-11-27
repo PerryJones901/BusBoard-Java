@@ -25,15 +25,8 @@ public class Website {
     @RequestMapping("/busInfo")
     ModelAndView busInfo(@RequestParam("postcode") String postcode) {
 
-        //Get the lon and lat.
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        PostcodeInfo postcodeInfo = client.target(String.format("https://api.postcodes.io/postcodes/%s", postcode))
-                .request(MediaType.APPLICATION_JSON_TYPE)
-                .get(PostcodeInfo.class);
-
-
         //Navigate to info.html page.
-        return new ModelAndView("info", "busInfoW", new BusInfo(postcode)) ;
+        return new ModelAndView("info", "busInfo", new BusInfo(postcode)) ;
     }
 
     public static void main(String[] args) throws Exception {

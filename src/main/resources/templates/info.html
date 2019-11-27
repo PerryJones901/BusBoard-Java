@@ -12,7 +12,14 @@
     <div layout:fragment="content" class="container body-content">
         <h2>Bus Information</h2>
         <div>
-            <p>You entered postcode <span th:text="${busInfoW.postcode}"></span></p>
+            <p> Buses near: <span th:text="${busInfo.postcode}"></span></p>
+            <table>
+                <tbody>
+                <tr th:each="line: ${busInfo.output}">
+                    <td th:text="${line}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     </body>
