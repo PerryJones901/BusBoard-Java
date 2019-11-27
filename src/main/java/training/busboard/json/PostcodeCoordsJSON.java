@@ -1,10 +1,9 @@
-package training.busboard;
+package training.busboard.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class PostcodeInfo {
-
-    public GlobalCoords result;
+public class PostcodeCoordsJSON {
+    public GlobalCoordsJSON result; //JSON
 }

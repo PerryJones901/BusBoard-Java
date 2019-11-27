@@ -20,7 +20,7 @@ public class Website {
     ModelAndView busInfo(@RequestParam("postcode") String postcode) {
 
         //Navigate to info.html page.
-        return new ModelAndView("info", "busInfo", new BusInfo(postcode, busStops)) ;
+        return new ModelAndView("info", "busInfo", new APIBusBoard(postcode)) ;
     }
 
     public static void main(String[] args) throws Exception {

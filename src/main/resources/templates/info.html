@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 
-    <!--@thymesVar id="busInfo" type="training.busboard.web.BusInfo"-->
+<!--@thymesVar id="busInfo" type="training.busboard.web.APIBusBoard"-->
 
     <head>
         <title>Bus Information</title>
@@ -13,19 +13,17 @@
         <h2>Bus Information</h2>
         <div>
             <p> Buses near: <span th:text="${busInfo.postcode}"></span></p>
-            <table>
-                <thead>
-                <tr>
-                    <th th:text="#{msgs.headers.name}">Name</th>
-                    <th th:text="#{msgs.headers.price}">Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="line: ${busInfo.output}">
-                    <td th:text="${line}"></td>
-                </tr>
-                </tbody>
-            </table>
+            <div th:each="busStop: ${busInfo.busStops}">
+                <div th:text="${busStop.commonName}"> </div>
+                <ol>
+                    <li th:each="arrivalEvent: ${busStop.getArrivalEvents()}">
+                        <p> Bus <span th:text="${arrivalEvent.lineId}"></span> to <span th:text="${arrivalEvent.destinationName}"></span>
+                            is arriving at <span th:text="${arrivalEvent.expectedArrival.toString()}"></span> </p>
+
+                    </li>
+                </ol>
+            </div>
+
         </div>
     </div>
     </body>
