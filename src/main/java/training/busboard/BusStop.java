@@ -7,5 +7,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class BusStop {
 
     public String naptanId;
-    public float distance;
+    public float distance; //Potential deletion.
 }
