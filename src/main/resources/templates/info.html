@@ -14,6 +14,12 @@
         <div>
             <p> Buses near: <span th:text="${busInfo.postcode}"></span></p>
             <table>
+                <thead>
+                <tr>
+                    <th th:text="#{msgs.headers.name}">Name</th>
+                    <th th:text="#{msgs.headers.price}">Price</th>
+                </tr>
+                </thead>
                 <tbody>
                 <tr th:each="line: ${busInfo.output}">
                     <td th:text="${line}"></td>

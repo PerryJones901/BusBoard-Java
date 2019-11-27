@@ -16,8 +16,8 @@ public class StopInfo {
 
     public String lineId;
     public String destinationName;
-    public String expectedArrival;
-    public LocalDateTime expectedArrivalTime;
+    public String expectedArrival; //Here just so JSON works.
+    public LocalDateTime expectedArrivalTime; //This is what we really output.
 
     public void convertToTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
